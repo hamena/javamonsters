@@ -1,29 +1,28 @@
-import javax.swing.*;
-
 public class Arena
 {
-    private Mounstro[] mounstros = new Mounstro[2];
-
     public Arena(){
-	mounstros[0] = new Mounstro();
-	mounstros[1] = new Mounstro();
     }
     
-    public void luchar(JTextArea logBatalla)
+    public String luchar(Mounstro m1, Mounstro m2)
 
     {
-	int cantidad_dano = 0, contador=1;
+	String logBatalla = new String("");
+	Mounstro[] mounstros = new Mounstro[2];
+	mounstros[0] = m1;
+	mounstros[1] = m2;
+	
+	int cantidad_dano = 0, contador=1, turno = 0, elotro = 0;
 
-	logBatalla.setText("\t"+mounstros[0].obtenerNombre()+" vs "+mounstros[1].obtenerNombre()+"\n\n");
+	DriverSalida.print("\t"+mounstros[0].obtenerNombre()+" vs "+
+			   mounstros[1].obtenerNombre()+"\n\n");
 
 	while (mounstros[0].vivo() && mounstros[1].vivo()){
-	    if ((cantidad_dano = mounstros[0].atacar(logBatalla)) > 0)
-		mounstros[1].recibirGolpe(cantidad_dano, logBatalla);
-	    if (mounstros[1].vivo())
-		if ((cantidad_dano = mounstros[1].atacar(logBatalla)) > 0)
-		    mounstros[0].recibirGolpe(cantidad_dano, logBatalla);
-
-	    logBatalla.append(" # # # # FIN DEL TURNO "+ (contador++) +" # # # # \n\n");
+	    turno = decidirTurno(mounstros[0],mounstros[1]);
+	    elotro = obtenerElOtro(turno);
+	    
+	    DriverSalida.print("\nLe toca a " + mounstros[turno].obtenerNombre() + "\n");
+	    if ((cantidad_dano = mounstros[turno].atacar()) > 0)
+		mounstros[elotro].recibirGolpe(cantidad_dano);
 	}
 
 	int ganador;
@@ -31,20 +30,36 @@ public class Arena
 	    ganador = 0;
 	else
 	    ganador = 1;
-
-	logBatalla.append("\t"+mounstros[ganador].obtenerNombre()+" gana la batalla con "+mounstros[ganador].obtenerHP()+" HP!\n");
+	
+	DriverSalida.print(mounstros[ganador].obtenerNombre()+
+			   " gana la batalla con "+mounstros[ganador].obtenerHP()+" HP!\n");
+	
+	return logBatalla;
     }
 
-    public void ponerNombre1(String n){	mounstros[0].ponerNombre(n); }
-    public void ponerHP1(int hp){ mounstros[0].ponerHP(hp); }
-    public void ponerDamage1(int d){ mounstros[0].ponerDamage(d); }
-    public void ponerEsquivar1(float e){ mounstros[0].ponerEsquivar(e); }
-    public void ponerExito1(float e){ mounstros[0].ponerExito(e); }
-    public void ponerCritico1(float c){ mounstros[0].ponerCritico(c); }
-    public void ponerNombre2(String n){ mounstros[1].ponerNombre(n); }
-    public void ponerHP2(int hp){ mounstros[1].ponerHP(hp); }
-    public void ponerDamage2(int d){ mounstros[1].ponerDamage(d); }
-    public void ponerEsquivar2(float e){ mounstros[1].ponerEsquivar(e); }
-    public void ponerExito2(float e){ mounstros[1].ponerExito(e); }
-    public void ponerCritico2(float c){ mounstros[1].ponerCritico(c); }
+    private int decidirTurno(Mounstro m1, Mounstro m2){
+	int vel1 = m1.obtenerVelocidad();
+	int vel2 = m2.obtenerVelocidad();
+	float estado1 = m1.obtenerEstadoTurno();
+	float estado2 = m2.obtenerEstadoTurno();
+
+	if (estado1 < estado2){ // Le toca al mounstro 1
+	    estado2 -= estado1;
+	    m2.ponerEstadoTurno(estado2);
+	    m1.ponerEstadoTurno(vel1);
+	    return 0;
+	}else{ // Le toca al mounstro 2
+	    estado1 -= estado2;
+	    m1.ponerEstadoTurno(estado1);
+	    m2.ponerEstadoTurno(vel2);
+	    return 1;
+	}
+    }
+
+    private int obtenerElOtro(int turno){
+	if (turno == 0) return 1;
+	else if (turno == 1) return 0;
+	else System.out.println("## Error en Arena::obtenerElOtro(int)");
+	return -1;
+    }
 }

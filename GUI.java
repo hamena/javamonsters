@@ -4,8 +4,8 @@ import javax.swing.*;
  
 public class GUI extends JFrame {
 
-    private JTextField textNombre1,textHP1,textDamage1, textEsquivar1, textExito1, textCritico1;
-    private JTextField textNombre2,textHP2,textDamage2, textEsquivar2, textExito2, textCritico2;
+    private JTextField textNombre1,textHP1,textDamage1, textVel1, textEsquivar1, textExito1, textCritico1;
+    private JTextField textNombre2,textHP2,textDamage2, textVel2, textEsquivar2, textExito2, textCritico2;
     private JTextArea logBatalla = new JTextArea(40,50);
 
     private Arena arena = new Arena();
@@ -24,6 +24,8 @@ public class GUI extends JFrame {
 	panelInput1.add(textHP1 = new JTextField(10));
 	panelInput1.add(new JLabel("DAMAGE:"));
 	panelInput1.add(textDamage1 = new JTextField(10));
+	panelInput1.add(new JLabel("VELOCIDAD:"));
+	panelInput1.add(textVel1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_ESQUIVAR:"));
 	panelInput1.add(textEsquivar1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_EXITO:"));
@@ -39,6 +41,8 @@ public class GUI extends JFrame {
 	panelInput2.add(textHP2 = new JTextField(10));
 	panelInput2.add(new JLabel("DAMAGE:"));
 	panelInput2.add(textDamage2 = new JTextField(10));
+	panelInput2.add(new JLabel("VELOCIDAD:"));
+	panelInput2.add(textVel2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_ESQUIVAR:"));
 	panelInput2.add(textEsquivar2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_EXITO:"));
@@ -47,7 +51,7 @@ public class GUI extends JFrame {
 	panelInput2.add(textCritico2 = new JTextField(10));
 	
 	JPanel panelMounstros = new JPanel()
-;	panelMounstros.setLayout(new GridLayout(1,2));
+	    ;	panelMounstros.setLayout(new GridLayout(1,2));
 	panelMounstros.add(panelInput1);
 	panelMounstros.add(panelInput2);
 
@@ -55,7 +59,7 @@ public class GUI extends JFrame {
 	JPanel panelControl = new JPanel();
 	panelControl.setLayout(new GridLayout(2,1));
 	panelControl.add(panelMounstros);
-	//	panelControl.add(new JSeparator(), BorderLayout.CENTER);
+
 	panelControl.add(botonLuchar);
 
 	logBatalla.setEditable(false);
@@ -66,25 +70,33 @@ public class GUI extends JFrame {
 	panelMain.add(scroll); 
 
         botonLuchar.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e){
-		arena.ponerNombre1(textNombre1.getText());
-		arena.ponerHP1(Integer.parseInt(textHP1.getText()));
-		arena.ponerDamage1(Integer.parseInt(textDamage1.getText()));
-		arena.ponerEsquivar1(Float.parseFloat(textEsquivar1.getText()));
-		arena.ponerExito1(Float.parseFloat(textExito1.getText()));
-		arena.ponerCritico1(Float.parseFloat(textCritico1.getText()));
+		public void actionPerformed(ActionEvent e){
+		    
+		    Mounstro m1 = new Mounstro(textNombre1.getText(),
+					       Integer.parseInt(textHP1.getText()),
+					       Integer.parseInt(textDamage1.getText()),
+					       Integer.parseInt(textVel1.getText()),
+					       Float.parseFloat(textEsquivar1.getText()),
+					       Float.parseFloat(textExito1.getText()),
+					       Float.parseFloat(textCritico1.getText()) );
 
-		arena.ponerNombre2(textNombre2.getText());
-		arena.ponerHP2(Integer.parseInt(textHP2.getText()));
-		arena.ponerDamage2(Integer.parseInt(textDamage2.getText()));
-		arena.ponerEsquivar2(Float.parseFloat(textEsquivar2.getText()));
-		arena.ponerExito2(Float.parseFloat(textExito2.getText()));
-		arena.ponerCritico2(Float.parseFloat(textCritico2.getText()));
+		    Mounstro m2 = new Mounstro(textNombre2.getText(),
+					       Integer.parseInt(textHP2.getText()),
+					       Integer.parseInt(textDamage2.getText()),
+					       Integer.parseInt(textVel2.getText()),
+					       Float.parseFloat(textEsquivar2.getText()),
+					       Float.parseFloat(textExito2.getText()),
+					       Float.parseFloat(textCritico2.getText())      
+					       );
 
-		try{ arena.luchar(logBatalla); }
-		catch(Exception ex){}
-            }
-        });
+		    try{
+			DriverSalida.logBatalla = logBatalla;
+			DriverSalida.GUI = true;
+			arena.luchar(m1,m2);
+			logBatalla = DriverSalida.logBatalla;
+		    } catch(Exception ex){}
+		}
+	    });
 	
         pane.add(panelMain);
     }
