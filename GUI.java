@@ -60,8 +60,8 @@ public class GUI extends JFrame {
 	panelInput2.add(new JLabel("P_BLOQUEO:"));
 	panelInput2.add(textBloqueo2 = new JTextField(10));
 		
-	JPanel panelMounstros = new JPanel()
-	    ;	panelMounstros.setLayout(new GridLayout(1,2));
+	JPanel panelMounstros = new JPanel();
+	panelMounstros.setLayout(new GridLayout(1,2));
 	panelMounstros.add(panelInput1);
 	panelMounstros.add(panelInput2);
 
