@@ -38,20 +38,20 @@ public class Arena
     }
 
     private int decidirTurno(Mounstro m1, Mounstro m2){
-	int vel1 = m1.obtenerVelocidad();
-	int vel2 = m2.obtenerVelocidad();
+	int ret1 = m1.obtenerRetardo();
+	int ret2 = m2.obtenerRetardo();
 	float estado1 = m1.obtenerEstadoTurno();
 	float estado2 = m2.obtenerEstadoTurno();
 
 	if (estado1 < estado2){ // Le toca al mounstro 1
 	    estado2 -= estado1;
 	    m2.ponerEstadoTurno(estado2);
-	    m1.ponerEstadoTurno(vel1);
+	    m1.ponerEstadoTurno(ret1);
 	    return 0;
 	}else{ // Le toca al mounstro 2
 	    estado1 -= estado2;
 	    m1.ponerEstadoTurno(estado1);
-	    m2.ponerEstadoTurno(vel2);
+	    m2.ponerEstadoTurno(ret2);
 	    return 1;
 	}
     }

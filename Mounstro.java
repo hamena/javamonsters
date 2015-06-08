@@ -3,7 +3,7 @@ import java.util.Random;
 public class Mounstro
 {
     private float p_esquivar, p_exito, p_critico;
-    private int HP, damage, velocidad;
+    private int HP, fuerza, retardo;
     private String nombre;
     private static Random rnd = new Random();
 
@@ -13,17 +13,17 @@ public class Mounstro
     
     public Mounstro(){}
     
-    public Mounstro(String n, int hp, int d, int v, float pesq, float pe, float pc)
+    public Mounstro(String n, int hp, int f, int r, float pesq, float pe, float pc)
     {
 	nombre = n;
 	HP = hp;
-	damage = d;
-	velocidad = v;
+	fuerza = f;
+	retardo = r;
 	p_esquivar = pesq;
 	p_exito = pe;
 	p_critico = pc;
 	
-	sigturno = velocidad; // Estado inicial es la velocidad del propio mounstro.
+	sigturno = retardo; 
     }
 
     public int atacar()
@@ -32,12 +32,12 @@ public class Mounstro
 	    float pericia = rnd.nextFloat()+0.5f;;
 	    if (rnd.nextFloat() < p_critico){
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
-				   (int)(damage * pericia * 1.5) + "! CRITICO\n");
-		return (int) (damage * pericia * 1.5f);
+				   (int)(fuerza * pericia * 1.5) + "! CRITICO\n");
+		return (int) (fuerza * pericia * 1.5f);
 	    }else{
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
-				   (int)(damage * pericia) + "!\n");
-		return (int) (damage * pericia);
+				   (int)(fuerza * pericia) + "!\n");
+		return (int) (fuerza * pericia);
 	    }
 	}
 	else{
@@ -46,13 +46,13 @@ public class Mounstro
 	}
     }
 
-    public void recibirGolpe(int damage)
+    public void recibirGolpe(int fuerza)
     {
 	if (rnd.nextFloat() < p_esquivar)
 	    DriverSalida.print("\t" + nombre + " esquiva el golpe! - HP: " + HP + "\n");
 	else{
-	    HP -= damage;
-	    DriverSalida.print("\t" + nombre + " recibe " + damage +
+	    HP -= fuerza;
+	    DriverSalida.print("\t" + nombre + " recibe " + fuerza +
 			       " de daño! - HP: " + HP + "\n");
 	}
     }
@@ -61,8 +61,8 @@ public class Mounstro
     
     public String obtenerNombre(){ return nombre; }
     public int obtenerHP(){ return HP; }
-    public int obtenerDamage(){ return damage; }
-    public int obtenerVelocidad(){ return velocidad; }
+    public int obtenerFuerza(){ return fuerza; }
+    public int obtenerRetardo(){ return retardo; }
     public float obtenerEsquivar(){ return p_esquivar; }
     public float obtenerExito(){ return p_exito; }
     public float obtenerCritico(){ return p_critico; }
@@ -70,8 +70,8 @@ public class Mounstro
     
     public void ponerNombre(String n){ nombre = n; }
     public void ponerHP(int h){ HP = h; }
-    public void ponerDamage(int d){ damage = d; }
-    public void ponerVelocidad(int v){ velocidad = v; }
+    public void ponerFuerza(int f){ fuerza = f; }
+    public void ponerRetardo(int r){ retardo = r; }
     public void ponerEsquivar(float e){ p_esquivar = e; }
     public void ponerExito(float e){ p_exito = e; }
     public void ponerCritico(float c){ p_critico = c; }

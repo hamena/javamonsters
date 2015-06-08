@@ -4,8 +4,8 @@ import javax.swing.*;
  
 public class GUI extends JFrame {
 
-    private JTextField textNombre1,textHP1,textDamage1, textVel1, textEsquivar1, textExito1, textCritico1;
-    private JTextField textNombre2,textHP2,textDamage2, textVel2, textEsquivar2, textExito2, textCritico2;
+    private JTextField textNombre1,textHP1,textFuerza1, textRet1, textEsquivar1, textExito1, textCritico1;
+    private JTextField textNombre2,textHP2,textFuerza2, textRet2, textEsquivar2, textExito2, textCritico2;
     private JTextArea logBatalla = new JTextArea(40,50);
 
     private Arena arena = new Arena();
@@ -22,10 +22,10 @@ public class GUI extends JFrame {
 	panelInput1.add(textNombre1 = new JTextField(10));
 	panelInput1.add(new JLabel("HP:"));
 	panelInput1.add(textHP1 = new JTextField(10));
-	panelInput1.add(new JLabel("DAMAGE:"));
-	panelInput1.add(textDamage1 = new JTextField(10));
-	panelInput1.add(new JLabel("VELOCIDAD:"));
-	panelInput1.add(textVel1 = new JTextField(10));
+	panelInput1.add(new JLabel("FUERZA:"));
+	panelInput1.add(textFuerza1 = new JTextField(10));
+	panelInput1.add(new JLabel("RETARDO DE ATAQUE:"));
+	panelInput1.add(textRet1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_ESQUIVAR:"));
 	panelInput1.add(textEsquivar1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_EXITO:"));
@@ -39,10 +39,10 @@ public class GUI extends JFrame {
 	panelInput2.add(textNombre2 = new JTextField(10));
 	panelInput2.add(new JLabel("HP:"));
 	panelInput2.add(textHP2 = new JTextField(10));
-	panelInput2.add(new JLabel("DAMAGE:"));
-	panelInput2.add(textDamage2 = new JTextField(10));
-	panelInput2.add(new JLabel("VELOCIDAD:"));
-	panelInput2.add(textVel2 = new JTextField(10));
+	panelInput2.add(new JLabel("FUERZA:"));
+	panelInput2.add(textFuerza2 = new JTextField(10));
+	panelInput2.add(new JLabel("RETARDO DE ATAQUE:"));
+	panelInput2.add(textRet2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_ESQUIVAR:"));
 	panelInput2.add(textEsquivar2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_EXITO:"));
@@ -74,16 +74,16 @@ public class GUI extends JFrame {
 		    
 		    Mounstro m1 = new Mounstro(textNombre1.getText(),
 					       Integer.parseInt(textHP1.getText()),
-					       Integer.parseInt(textDamage1.getText()),
-					       Integer.parseInt(textVel1.getText()),
+					       Integer.parseInt(textFuerza1.getText()),
+					       Integer.parseInt(textRet1.getText()),
 					       Float.parseFloat(textEsquivar1.getText()),
 					       Float.parseFloat(textExito1.getText()),
 					       Float.parseFloat(textCritico1.getText()) );
 
 		    Mounstro m2 = new Mounstro(textNombre2.getText(),
 					       Integer.parseInt(textHP2.getText()),
-					       Integer.parseInt(textDamage2.getText()),
-					       Integer.parseInt(textVel2.getText()),
+					       Integer.parseInt(textFuerza2.getText()),
+					       Integer.parseInt(textRet2.getText()),
 					       Float.parseFloat(textEsquivar2.getText()),
 					       Float.parseFloat(textExito2.getText()),
 					       Float.parseFloat(textCritico2.getText())      
