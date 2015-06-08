@@ -103,6 +103,7 @@ public class GUI extends JFrame {
 					       Float.parseFloat(textBloqueo2.getText()));
 
 		    try{
+			logBatalla.setText("");
 			DriverSalida.logBatalla = logBatalla;
 			DriverSalida.GUI = true;
 			arena.luchar(m1,m2);
