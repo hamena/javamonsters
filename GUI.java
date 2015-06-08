@@ -4,8 +4,10 @@ import javax.swing.*;
  
 public class GUI extends JFrame {
 
-    private JTextField textNombre1,textHP1,textFuerza1, textRet1, textEsquivar1, textExito1, textCritico1;
-    private JTextField textNombre2,textHP2,textFuerza2, textRet2, textEsquivar2, textExito2, textCritico2;
+    private JTextField textNombre1,textHP1,textFuerza1, textRet1, textEscudo1,
+	textEsquivar1, textExito1, textCritico1, textBloqueo1;
+    private JTextField textNombre2,textHP2,textFuerza2, textRet2, textEscudo2,
+	textEsquivar2, textExito2, textCritico2, textBloqueo2;
     private JTextArea logBatalla = new JTextArea(40,50);
 
     private Arena arena = new Arena();
@@ -26,12 +28,16 @@ public class GUI extends JFrame {
 	panelInput1.add(textFuerza1 = new JTextField(10));
 	panelInput1.add(new JLabel("RETARDO DE ATAQUE:"));
 	panelInput1.add(textRet1 = new JTextField(10));
+	panelInput1.add(new JLabel("VALOR DE ESCUDO:"));
+	panelInput1.add(textEscudo1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_ESQUIVAR:"));
 	panelInput1.add(textEsquivar1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_EXITO:"));
 	panelInput1.add(textExito1 = new JTextField(10));
 	panelInput1.add(new JLabel("P_CRITICO:"));
 	panelInput1.add(textCritico1 = new JTextField(10));
+	panelInput1.add(new JLabel("P_BLOQUEO:"));
+	panelInput1.add(textBloqueo1 = new JTextField(10));
 	
 	JPanel panelInput2 = new JPanel();
 	panelInput2.setLayout(new GridLayout(0,2));
@@ -43,13 +49,17 @@ public class GUI extends JFrame {
 	panelInput2.add(textFuerza2 = new JTextField(10));
 	panelInput2.add(new JLabel("RETARDO DE ATAQUE:"));
 	panelInput2.add(textRet2 = new JTextField(10));
+	panelInput2.add(new JLabel("VALOR DE ESCUDO:"));
+	panelInput2.add(textEscudo2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_ESQUIVAR:"));
 	panelInput2.add(textEsquivar2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_EXITO:"));
 	panelInput2.add(textExito2 = new JTextField(10));
 	panelInput2.add(new JLabel("P_CRITICO:"));
 	panelInput2.add(textCritico2 = new JTextField(10));
-	
+	panelInput2.add(new JLabel("P_BLOQUEO:"));
+	panelInput2.add(textBloqueo2 = new JTextField(10));
+		
 	JPanel panelMounstros = new JPanel()
 	    ;	panelMounstros.setLayout(new GridLayout(1,2));
 	panelMounstros.add(panelInput1);
@@ -76,18 +86,21 @@ public class GUI extends JFrame {
 					       Integer.parseInt(textHP1.getText()),
 					       Integer.parseInt(textFuerza1.getText()),
 					       Integer.parseInt(textRet1.getText()),
+					       Integer.parseInt(textEscudo1.getText()),
 					       Float.parseFloat(textEsquivar1.getText()),
 					       Float.parseFloat(textExito1.getText()),
-					       Float.parseFloat(textCritico1.getText()) );
+					       Float.parseFloat(textCritico1.getText()),
+					       Float.parseFloat(textBloqueo1.getText()));
 
 		    Mounstro m2 = new Mounstro(textNombre2.getText(),
 					       Integer.parseInt(textHP2.getText()),
 					       Integer.parseInt(textFuerza2.getText()),
 					       Integer.parseInt(textRet2.getText()),
+					       Integer.parseInt(textEscudo2.getText()),
 					       Float.parseFloat(textEsquivar2.getText()),
 					       Float.parseFloat(textExito2.getText()),
-					       Float.parseFloat(textCritico2.getText())      
-					       );
+					       Float.parseFloat(textCritico2.getText()),
+					       Float.parseFloat(textBloqueo2.getText()));
 
 		    try{
 			DriverSalida.logBatalla = logBatalla;
