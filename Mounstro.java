@@ -8,6 +8,8 @@ public class Mounstro
     private static Random rnd = new Random();
     private static int totalMounstros = 0;
 
+    public static float dispersionAtaque = 0.5f, dispersionBloqueo = 0.5f;
+
     // Variable para saber el progreso del turno.
     // Mayor significa mas probabilidad de atacar primero.
     private float sigturno;
@@ -44,7 +46,7 @@ public class Mounstro
     public int atacar()
     {
 	if (rnd.nextFloat() < p_exito){
-	    float pericia = rnd.nextFloat()+0.5f;
+	    float pericia = calcularPericia(dispersionAtaque);
 	    if (rnd.nextFloat() < p_critico){
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
 				   (int)(fuerza * pericia * 1.5) + "! CRITICO\n");
@@ -63,11 +65,11 @@ public class Mounstro
 
     public void recibirGolpe(int fuerza)
     {
-	float pericia = rnd.nextFloat()+0.5f;
 	if (rnd.nextFloat() < p_esquivar) // Consigue esquivar el golpe
 	    DriverSalida.print("\t" + nombre + " esquiva el golpe! - HP: " + HP + "\n");
 	else{ // Recibe el golpe
 	    if (rnd.nextFloat() < p_bloqueo){ // Consigue bloquear con el escudo
+		float pericia = calcularPericia(dispersionBloqueo);
 		int bloqueado = (int)(escudo * pericia);
 		int fuerzaTmp = (int)(fuerza - bloqueado);
 		HP -= fuerzaTmp>0 ? fuerzaTmp : 0;
@@ -118,5 +120,21 @@ public class Mounstro
 	str += "Critico: " + p_critico + "\n";
 	str += "Bloqueo: " + p_bloqueo + "\n";
 	return str;
+    }
+
+    private float calcularPericia(float dispersion){
+	if (dispersion > 0.0f){
+	    float min = 0.0f, max = dispersion*2;
+	    float r = aleatorioEnRangoReal(min,max);
+	    return r + (1.0f - dispersion);
+	}
+	else return 1;
+    }
+
+    private float aleatorioEnRangoReal(float min, float max){
+	return
+	    rnd.nextFloat() < 0.5 ?
+	    ((1-rnd.nextFloat()) * (max-min) + min) :
+	    (rnd.nextFloat() * (max-min) + min);
     }
 }
