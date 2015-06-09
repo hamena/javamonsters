@@ -6,12 +6,25 @@ public class Mounstro
     private int HP, fuerza, retardo, escudo;
     private String nombre;
     private static Random rnd = new Random();
+    private static int totalMounstros = 0;
 
     // Variable para saber el progreso del turno.
     // Mayor significa mas probabilidad de atacar primero.
     private float sigturno;
     
-    public Mounstro(){}
+    public Mounstro(){
+	nombre = new String("Mounstro_" + (totalMounstros++));
+	HP = 50;
+	fuerza = 5;
+	retardo = 100;
+	escudo = 0;
+	p_esquivar = 0.0f;
+	p_exito = 0.5f;
+	p_critico = 0.0f;
+	p_bloqueo = 0.0f;
+
+	sigturno = retardo;
+    }
     
     public Mounstro(String n, int hp, int f, int r, int e, float pesq, float pe, float pc, float pb)
     {
@@ -55,15 +68,16 @@ public class Mounstro
 	    DriverSalida.print("\t" + nombre + " esquiva el golpe! - HP: " + HP + "\n");
 	else{ // Recibe el golpe
 	    if (rnd.nextFloat() < p_bloqueo){ // Consigue bloquear con el escudo
+		int bloqueado = (int)(escudo * pericia);
+		int fuerzaTmp = (int)(fuerza - bloqueado);
+		HP -= fuerzaTmp>0 ? fuerzaTmp : 0;
+		DriverSalida.print("\t" + nombre + " bloquea " + bloqueado +
+				   " y recibe " + (fuerzaTmp>0 ? fuerzaTmp : 0) +
+				   " de daño! - HP: " + HP +"\n");
+	    }else{ // No bloquea con el escudo
 		HP -= fuerza;
 		DriverSalida.print("\t" + nombre + " recibe " + fuerza +
 				   " de daño! - HP: " + HP + "\n");
-	    }else{ // No bloquea con el escudo
-		int bloqueado = (int)(escudo * pericia);
-		HP -= (int)(fuerza - bloqueado);
-		DriverSalida.print("\t" + nombre + " bloquea " + bloqueado +
-				   " y recibe " + (int)(fuerza - bloqueado) + " de daño! - HP: "
-				   + HP +"\n");
 	    }
 	}
     }
@@ -91,4 +105,18 @@ public class Mounstro
     public void ponerCritico(float c){ p_critico = c; }
     public void ponerBloqueo(float b){ p_bloqueo = b; }
     public void ponerEstadoTurno(float st){ sigturno = st; }
+
+    @Override
+    public String toString(){
+	String str = new String(nombre+"\n");
+	str += "HP: " + HP + "\n";
+	str += "Fuerza: " + fuerza + "\n";
+	str += "Retardo: " + retardo + "\n";
+	str += "Escudo: " + escudo + "\n";
+	str += "Esquivar: " + p_esquivar + "\n";
+	str += "Exito: " + p_exito + "\n";
+	str += "Critico: " + p_critico + "\n";
+	str += "Bloqueo: " + p_bloqueo + "\n";
+	return str;
+    }
 }
