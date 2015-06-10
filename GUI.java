@@ -1,121 +1,28 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.util.Locale;
  
-public class GUI extends JFrame {
+public class GUI2 extends JFrame {
 
-    private JTextField textNombre1,textHP1,textFuerza1, textRet1, textEscudo1,
-	textEsquivar1, textExito1, textCritico1, textBloqueo1;
-    private JTextField textNombre2,textHP2,textFuerza2, textRet2, textEscudo2,
-	textEsquivar2, textExito2, textCritico2, textBloqueo2;
-    private JTextArea logBatalla = new JTextArea(40,50);
+    static JTextArea logBatalla = new JTextArea(50,60);
+    static JScrollPane scroll = new JScrollPane(logBatalla);
+    static JButton opciones = new JButton("Opciones");
+    static JButton luchar = new JButton("A luchar!");
 
-    private Arena arena = new Arena();
+    static ConfMounstro mounstro1 = new ConfMounstro("Mounstro 1");
+    static ConfMounstro mounstro2 = new ConfMounstro("Mounstro 2");
     
-    public GUI(String name) {
+    private static Arena arena = new Arena();
+
+    public GUI2(String name) {
         super(name);
         setResizable(true);
     }
      
-    public void anadirComponentes(final Container pane) {
-	JPanel panelInput1 = new JPanel();
-	panelInput1.setLayout(new GridLayout(0,2));
-	panelInput1.add(new JLabel("Nombre:"));
-	panelInput1.add(textNombre1 = new JTextField(10));
-	panelInput1.add(new JLabel("HP:"));
-	panelInput1.add(textHP1 = new JTextField(10));
-	panelInput1.add(new JLabel("FUERZA:"));
-	panelInput1.add(textFuerza1 = new JTextField(10));
-	panelInput1.add(new JLabel("RETARDO DE ATAQUE:"));
-	panelInput1.add(textRet1 = new JTextField(10));
-	panelInput1.add(new JLabel("VALOR DE ESCUDO:"));
-	panelInput1.add(textEscudo1 = new JTextField(10));
-	panelInput1.add(new JLabel("P_ESQUIVAR:"));
-	panelInput1.add(textEsquivar1 = new JTextField(10));
-	panelInput1.add(new JLabel("P_EXITO:"));
-	panelInput1.add(textExito1 = new JTextField(10));
-	panelInput1.add(new JLabel("P_CRITICO:"));
-	panelInput1.add(textCritico1 = new JTextField(10));
-	panelInput1.add(new JLabel("P_BLOQUEO:"));
-	panelInput1.add(textBloqueo1 = new JTextField(10));
-	
-	JPanel panelInput2 = new JPanel();
-	panelInput2.setLayout(new GridLayout(0,2));
-	panelInput2.add(new JLabel("Nombre:"));
-	panelInput2.add(textNombre2 = new JTextField(10));
-	panelInput2.add(new JLabel("HP:"));
-	panelInput2.add(textHP2 = new JTextField(10));
-	panelInput2.add(new JLabel("FUERZA:"));
-	panelInput2.add(textFuerza2 = new JTextField(10));
-	panelInput2.add(new JLabel("RETARDO DE ATAQUE:"));
-	panelInput2.add(textRet2 = new JTextField(10));
-	panelInput2.add(new JLabel("VALOR DE ESCUDO:"));
-	panelInput2.add(textEscudo2 = new JTextField(10));
-	panelInput2.add(new JLabel("P_ESQUIVAR:"));
-	panelInput2.add(textEsquivar2 = new JTextField(10));
-	panelInput2.add(new JLabel("P_EXITO:"));
-	panelInput2.add(textExito2 = new JTextField(10));
-	panelInput2.add(new JLabel("P_CRITICO:"));
-	panelInput2.add(textCritico2 = new JTextField(10));
-	panelInput2.add(new JLabel("P_BLOQUEO:"));
-	panelInput2.add(textBloqueo2 = new JTextField(10));
-		
-	JPanel panelMounstros = new JPanel();
-	panelMounstros.setLayout(new GridLayout(1,2));
-	panelMounstros.add(panelInput1);
-	panelMounstros.add(panelInput2);
-
-	JButton botonLuchar = new JButton("A luchar!");
-	JPanel panelControl = new JPanel();
-	panelControl.setLayout(new GridLayout(2,1));
-	panelControl.add(panelMounstros);
-
-	panelControl.add(botonLuchar);
-
-	logBatalla.setEditable(false);
-	JScrollPane scroll = new JScrollPane(logBatalla);
-	JPanel panelMain = new JPanel();
-	panelMain.setLayout(new GridLayout(1,2));
-	panelMain.add(panelControl);
-	panelMain.add(scroll); 
-
-        botonLuchar.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e){
-		    
-		    Mounstro m1 = new Mounstro(textNombre1.getText(),
-					       Integer.parseInt(textHP1.getText()),
-					       Integer.parseInt(textFuerza1.getText()),
-					       Integer.parseInt(textRet1.getText()),
-					       Integer.parseInt(textEscudo1.getText()),
-					       Float.parseFloat(textEsquivar1.getText()),
-					       Float.parseFloat(textExito1.getText()),
-					       Float.parseFloat(textCritico1.getText()),
-					       Float.parseFloat(textBloqueo1.getText()));
-
-		    Mounstro m2 = new Mounstro(textNombre2.getText(),
-					       Integer.parseInt(textHP2.getText()),
-					       Integer.parseInt(textFuerza2.getText()),
-					       Integer.parseInt(textRet2.getText()),
-					       Integer.parseInt(textEscudo2.getText()),
-					       Float.parseFloat(textEsquivar2.getText()),
-					       Float.parseFloat(textExito2.getText()),
-					       Float.parseFloat(textCritico2.getText()),
-					       Float.parseFloat(textBloqueo2.getText()));
-
-		    try{
-			logBatalla.setText("");
-			DriverSalida.logBatalla = logBatalla;
-			DriverSalida.GUI = true;
-			arena.luchar(m1,m2);
-			logBatalla = DriverSalida.logBatalla;
-		    } catch(Exception ex){}
-		}
-	    });
-	
-        pane.add(panelMain);
-    }
-     
     public static void main(String[] args) {
+	Locale.setDefault(Locale.US);
+	
         /* Use an appropriate Look and Feel */
         try {
             //UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -132,9 +39,68 @@ public class GUI extends JFrame {
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
 
+	JPanel mounstros = new JPanel();
+	mounstros.setLayout(new GridLayout(0,2));
+	mounstros.add(mounstro1);
+	mounstros.add(mounstro2);
+
+	JPanel opcionesYLuchar = new JPanel();
+	opcionesYLuchar.setLayout(new GridLayout(1,2));
+	opcionesYLuchar.add(opciones);
+	opcionesYLuchar.add(luchar);
+	
+	JPanel panelIzq = new JPanel();
+	panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.PAGE_AXIS));
+	panelIzq.add(mounstros);
+	panelIzq.add(opcionesYLuchar);
+
+	logBatalla.setEditable(false);
+	JPanel batalla = new JPanel();
+	batalla.setBorder(BorderFactory.createTitledBorder("Registro de la batalla"));
+	batalla.add(scroll);
+
+	JPanel global = new JPanel();
+	global.setLayout(new GridLayout(1,2));
+	global.add(panelIzq);
+	global.add(batalla);
+
+	luchar.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		    JTextField[] info1 = mounstro1.obtenerCampos();
+		    Mounstro m1 = new Mounstro(info1[0].getText(),
+					       Integer.parseInt(info1[1].getText()),
+					       Integer.parseInt(info1[2].getText()),
+					       Integer.parseInt(info1[3].getText()),
+					       Integer.parseInt(info1[4].getText()),
+					       Float.parseFloat(info1[5].getText()),
+					       Float.parseFloat(info1[6].getText()),
+					       Float.parseFloat(info1[7].getText()),
+					       Float.parseFloat(info1[8].getText()));
+
+		    JTextField[] info2 = mounstro2.obtenerCampos();
+		    Mounstro m2 = new Mounstro(info2[0].getText(),
+					       Integer.parseInt(info2[1].getText()),
+					       Integer.parseInt(info2[2].getText()),
+					       Integer.parseInt(info2[3].getText()),
+					       Integer.parseInt(info2[4].getText()),
+					       Float.parseFloat(info2[5].getText()),
+					       Float.parseFloat(info2[6].getText()),
+					       Float.parseFloat(info2[7].getText()),
+					       Float.parseFloat(info2[8].getText()));
+
+		    try{
+			logBatalla.setText("");
+			DriverSalida.logBatalla = logBatalla;
+			DriverSalida.GUI = true;
+			arena.luchar(m1,m2);
+			logBatalla = DriverSalida.logBatalla;
+		    } catch(Exception ex){}
+		}
+	    });
+	
 	GUI frame = new GUI("JavaMonsters");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.anadirComponentes(frame.getContentPane());
+        frame.add(global);
 	// Mostrar la ventana
         frame.pack();
         frame.setVisible(true);
