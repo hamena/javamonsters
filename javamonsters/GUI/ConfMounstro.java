@@ -69,6 +69,7 @@ public class ConfMounstro extends JPanel{
 	panelControl.add(new JLabel("Pts. restantes:"));
 	restantes = new JTextField(10);
 	restantes.setText("10");
+	restantes.setEditable(false);
 	panelControl.add(restantes);
 	reiniciar = new JButton("Reiniciar");
 	generar = new JButton("Generar aleat.");
@@ -242,10 +243,10 @@ public class ConfMounstro extends JPanel{
 		    texts[2].setText(Integer.toString(aux.obtenerFuerza()));
 		    texts[3].setText(Integer.toString(aux.obtenerRetardo()));
 		    texts[4].setText(Integer.toString(aux.obtenerEscudo()));
-		    texts[5].setText(Float.toString(aux.obtenerEsquivar()));
-		    texts[6].setText(Float.toString(aux.obtenerExito()));
-		    texts[7].setText(Float.toString(aux.obtenerCritico()));
-		    texts[8].setText(Float.toString(aux.obtenerBloqueo()));
+		    texts[5].setText(String.format("%.3f",aux.obtenerEsquivar()));
+		    texts[6].setText(String.format("%.3f",aux.obtenerExito()));
+		    texts[7].setText(String.format("%.3f",aux.obtenerCritico()));
+		    texts[8].setText(String.format("%.3f",aux.obtenerBloqueo()));
 		    restantes.setText(Integer.toString(0));
 		}
 	    });
@@ -263,6 +264,8 @@ public class ConfMounstro extends JPanel{
 	texts[6].setText(Float.toString(aux.obtenerExito()));    // Exito
 	texts[7].setText(Float.toString(aux.obtenerCritico()));  // Critico
 	texts[8].setText(Float.toString(aux.obtenerBloqueo()));  // Bloqueo
+
+	restantes.setText(nivel.getText());
     }
 
     private void incrementarCampo(JTextField campo, int valor){

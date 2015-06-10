@@ -53,7 +53,7 @@ public class Mounstro
 	    float pericia = calcularPericia(dispersionAtaque);
 	    if (rnd.nextFloat() < p_critico){
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
-				   (int)(fuerza * pericia * 1.5) + "! CRITICO\n");
+				   (int)(fuerz10a * pericia * 1.5) + "! CRITICO\n");
 		return (int) (fuerza * pericia * 1.5f);
 	    }else{
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +

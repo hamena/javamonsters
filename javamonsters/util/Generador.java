@@ -17,22 +17,22 @@ public class Generador{
 	int HP=0, fuerza=0, retardo=0, escudo=0;
 	float esquiva=0.0f, exito=0.0f, critico=0.0f, bloqueo=0.0f;
 	for (int i=0; i<nivel; ++i){
-	    int r = rnd.nextInt() % nParametros;
-	    if (r == 0 && (HP/incHP > nParametros/2)){
+	    int r = rnd.nextInt(nParametros);
+	    if (r == 0 && (HP/incHP <= nivel/2)){
 		HP += incHP;
-	    }else if (r == 1 && (fuerza/incFuerza <= nParametros/2)){
+	    }else if (r == 1 && (fuerza/incFuerza <= nivel/2)){
 		fuerza += incFuerza;
-	    }else if (r == 2 && (retardo/incRetardo <= nParametros/2)){
+	    }else if (r == 2 && (retardo/incRetardo <= nivel/2)){
 		retardo += incRetardo;
-	    }else if (r == 3 && (escudo/incEscudo <= nParametros/2)){
+	    }else if (r == 3 && (escudo/incEscudo <= nivel/2)){
 		escudo += incEscudo;
-	    }else if (r == 4 && (esquiva/incEsquivar <= nParametros/2)){
+	    }else if (r == 4 && (esquiva/incEsquivar <= nivel/2)){
 		esquiva += incEsquivar;
-	    }else if (r == 5 && (exito/incExito <= nParametros/2)){
+	    }else if (r == 5 && (exito/incExito <= nivel/2)){
 		exito += incExito;
-	    }else if (r == 6 && (critico/incCritico <= nParametros/2)){
+	    }else if (r == 6 && (critico/incCritico <= nivel/2)){
 		critico += incCritico;
-	    }else if (r == 7 && (bloqueo/incBloqueo <= nParametros/2)){
+	    }else if (r == 7 && (bloqueo/incBloqueo <= nivel/2)){
 		bloqueo += incBloqueo;
 	    }else
 		--i; // Se vuelve a intentar
