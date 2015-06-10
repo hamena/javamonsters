@@ -3,7 +3,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Locale;
  
-public class GUI2 extends JFrame {
+public class GUI extends JFrame {
 
     static JTextArea logBatalla = new JTextArea(50,60);
     static JScrollPane scroll = new JScrollPane(logBatalla);
@@ -15,7 +15,7 @@ public class GUI2 extends JFrame {
     
     private static Arena arena = new Arena();
 
-    public GUI2(String name) {
+    public GUI(String name) {
         super(name);
         setResizable(true);
     }
