@@ -13,9 +13,9 @@ public class ConfMounstro extends JPanel{
     private static final int minHP=50, minFuerza=5, minRetardo=1, minEscudo=0;
     private static final float maxEsquivar=0.95f, maxExito=1.f, maxCritico=1.f, maxBloqueo=1.f;
     private static final float minEsquivar=0.f, minExito=0.025f, minCritico=0.f, minBloqueo=0.f;
-    private static final String[] campos = {"NOMBRE:", "HP:", "FUERZA:", "RETARDO DE ATAQUE:",
-				     "VALOR DE ESCUDO:", "PROB. ESQUIVAR", "PROB. EXITO",
-				     "PROB. CRITICO", "PROB. BLOQUEO"};
+    private static final String[] campos = {"NOMBRE:", "HP:", "FUERZA:", "RETARDO:",
+				     "ESCUDO:", "P. ESQUIVAR:", "P. EXITO:",
+				     "P. CRITICO:", "P. BLOQUEO:"};
 
     private JPanel panelGeneral, panelControl;
     private JTextField[] texts = new JTextField[nCampos];
@@ -38,21 +38,34 @@ public class ConfMounstro extends JPanel{
 
 	for (int i=0; i<nCampos; ++i){
 	    JPanel fila = new JPanel();
-	    fila.setBorder(BorderFactory.createTitledBorder(campos[i]));
-	    fila.setLayout(new BoxLayout(fila,BoxLayout.PAGE_AXIS));
-	    JPanel aux = new JPanel();
-	    aux.setLayout(new GridLayout(0,2));
+	    //	    fila.setBorder(BorderFactory.createTitledBorder(campos[i]));
+	    //	    fila.setLayout(new BoxLayout(fila,BoxLayout.PAGE_AXIS));
+	    fila.setLayout(new GridLayout(2,2));
+	    
+	    //	    JPanel aux = new JPanel();
+	    //	    aux.setLayout(new GridLayout(0,2));
+	    
+	    fila.add(new JLabel(campos[i]));
 	    texts[i] = new JTextField(10);
+	    fila.add(texts[i]);
 	    if (i > 0){
 		botones[i*2] = new JButton("+");
 		botones[i*2 + 1] = new JButton("-");
-		aux.add(botones[i*2]);
-		aux.add(botones[i*2 + 1]);
+		fila.add(botones[i*2]);
+		fila.add(botones[i*2 + 1]);
 	    }
 	    
 	    //	    fila.add(new JLabel(campos[i]));
-	    fila.add(texts[i]);
+	    /*
+	    texts[i] = new JTextField(10);
+	    JFrame campoConNombre = new JFrame();
+	    campoConNombre.setLayout(new GridLayout(1,2));
+	    campoConNombre.add(new JLabel(campos[i]));
+	    campoConNombre.add(texts[i]);
+	    
+	    fila.add(campoConNombre);
 	    fila.add(aux);
+	    */
 	    panelGeneral.add(fila);
 	}
 

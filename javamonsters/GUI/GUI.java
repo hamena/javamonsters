@@ -10,7 +10,7 @@ import java.util.Locale;
  
 public class GUI extends JFrame {
 
-    static JTextArea logBatalla = new JTextArea(50,60);
+    static JTextArea logBatalla = new JTextArea(40,50);
     static JScrollPane scroll = new JScrollPane(logBatalla);
     static JButton opciones = new JButton("Opciones");
     static JButton luchar = new JButton("A luchar!");
@@ -73,6 +73,7 @@ public class GUI extends JFrame {
 	
 	JPanel panelIzq = new JPanel();
 	panelIzq.setLayout(new BoxLayout(panelIzq,BoxLayout.PAGE_AXIS));
+	panelIzq.setPreferredSize(new Dimension(200,300));
 	panelIzq.add(mounstros);
 	panelIzq.add(opcionesYLuchar);
 
