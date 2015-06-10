@@ -17,12 +17,17 @@ public class GUI extends JFrame {
 
     static ConfMounstro mounstro1 = new ConfMounstro("Mounstro 1");
     static ConfMounstro mounstro2 = new ConfMounstro("Mounstro 2");
+
+    static Opciones frameOps = new Opciones("Opciones");
+    static JDesktopPane desktop = new JDesktopPane();
     
     private static Arena arena = new Arena();
 
     public GUI(String name) {
         super(name);
         setResizable(true);
+	//setContentPane(desktop);
+	//desktop.add(frameOps);
     }
      
     public static void main(String[] args) {
@@ -102,10 +107,21 @@ public class GUI extends JFrame {
 		    } catch(Exception ex){}
 		}
 	    });
+
+	opciones.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		    frameOps.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		    // Mostrar la ventana
+		    frameOps.pack();
+		    frameOps.setVisible(true);
+		}
+	    });
 	
 	GUI frame = new GUI("JavaMonsters");
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(global);
+	//	frame.add(desktop);
+
 	// Mostrar la ventana
         frame.pack();
         frame.setVisible(true);
