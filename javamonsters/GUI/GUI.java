@@ -26,8 +26,8 @@ public class GUI extends JFrame {
     public GUI(String name) {
         super(name);
         setResizable(true);
-	//setContentPane(desktop);
-	//desktop.add(frameOps);
+	mounstro1.ponerNombre("Ortega");
+	mounstro2.ponerNombre("Pacheco");
     }
      
     public static void main(String[] args) {
@@ -49,6 +49,18 @@ public class GUI extends JFrame {
         /* Turn off metal's use of bold fonts */
         UIManager.put("swing.boldMetal", Boolean.FALSE);
 
+	GUI frame = new GUI("JavaMonsters");
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+	frame.anadirComponentes();
+	frame.anadirComportamiento();
+
+	// Mostrar la ventana
+        frame.pack();
+        frame.setVisible(true);
+    }
+
+    public void anadirComponentes(){
 	JPanel mounstros = new JPanel();
 	mounstros.setLayout(new GridLayout(0,2));
 	mounstros.add(mounstro1);
@@ -73,7 +85,10 @@ public class GUI extends JFrame {
 	global.setLayout(new GridLayout(1,2));
 	global.add(panelIzq);
 	global.add(batalla);
+	this.add(global);
+    }
 
+    public void anadirComportamiento(){
 	luchar.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		    JTextField[] info1 = mounstro1.obtenerCampos();
@@ -116,14 +131,5 @@ public class GUI extends JFrame {
 		    frameOps.setVisible(true);
 		}
 	    });
-	
-	GUI frame = new GUI("JavaMonsters");
-	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.add(global);
-	//	frame.add(desktop);
-
-	// Mostrar la ventana
-        frame.pack();
-        frame.setVisible(true);
     }
 }

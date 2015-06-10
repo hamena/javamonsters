@@ -253,6 +253,7 @@ public class ConfMounstro extends JPanel{
     }
 
     public JTextField[] obtenerCampos(){ return texts; }
+    public void ponerNombre(String nombre){ texts[0].setText(nombre); }
     
     private void reiniciarCampos(){
 	Mounstro aux = new Mounstro();
