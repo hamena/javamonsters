@@ -2,6 +2,9 @@ import java.util.Random;
 
 public class Generador{
 
+    public static int incHP=50, incFuerza=5, incRetardo=-5, incEscudo=5;
+    public static float incEsquivar=0.025f, incExito=0.025f, incCritico=0.05f, incBloqueo=0.05f;
+    
     private static Random rnd = new Random();
     
     public static Mounstro generarMounstro(int nivel){
@@ -11,29 +14,29 @@ public class Generador{
 	float esquiva=0.0f, exito=0.0f, critico=0.0f, bloqueo=0.0f;
 	for (int i=0; i<nivel; ++i){
 	    int r = rnd.nextInt() % nParametros;
-	    if (r == 0 && (HP/50 > nParametros/2)){
-		HP += 50;
-	    }else if (r == 1 && (fuerza/5 <= nParametros/2)){
-		fuerza += 5;
-	    }else if (r == 2 && (retardo/5 <= nParametros/2)){
-		retardo += 5;
-	    }else if (r == 3 && (escudo/5 <= nParametros/2)){
-		escudo += 5;
-	    }else if (r == 4 && (esquiva/0.025f <= nParametros/2)){
-		esquiva += 0.025f;
-	    }else if (r == 5 && (exito/0.025f <= nParametros/2)){
-		exito += 0.025f;
-	    }else if (r == 6 && (critico/0.05f <= nParametros/2)){
-		critico += 0.05f;
-	    }else if (r == 7 && (bloqueo/0.05f <= nParametros/2)){
-		bloqueo += 0.05f;
+	    if (r == 0 && (HP/incHP > nParametros/2)){
+		HP += incHP;
+	    }else if (r == 1 && (fuerza/incFuerza <= nParametros/2)){
+		fuerza += incFuerza;
+	    }else if (r == 2 && (retardo/incRetardo <= nParametros/2)){
+		retardo += incRetardo;
+	    }else if (r == 3 && (escudo/incEscudo <= nParametros/2)){
+		escudo += incEscudo;
+	    }else if (r == 4 && (esquiva/incEsquivar <= nParametros/2)){
+		esquiva += incEsquivar;
+	    }else if (r == 5 && (exito/incExito <= nParametros/2)){
+		exito += incExito;
+	    }else if (r == 6 && (critico/incCritico <= nParametros/2)){
+		critico += incCritico;
+	    }else if (r == 7 && (bloqueo/incBloqueo <= nParametros/2)){
+		bloqueo += incBloqueo;
 	    }else
 		--i; // Se vuelve a intentar
 	}
 
 	m.ponerHP(m.obtenerHP() + HP);
 	m.ponerFuerza(m.obtenerFuerza() + fuerza);
-	m.ponerRetardo(m.obtenerRetardo() - retardo);
+	m.ponerRetardo(m.obtenerRetardo() + retardo);
 	m.ponerEscudo(m.obtenerEscudo() + escudo);
 	m.ponerEsquivar(m.obtenerEsquivar() + esquiva);
 	m.ponerExito(m.obtenerExito() + exito);
