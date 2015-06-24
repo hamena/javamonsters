@@ -46,6 +46,8 @@ public class ConfMounstro extends JPanel{
 	    if (i > 0){
 		botones[i*2] = new JButton("+");
 		botones[i*2 + 1] = new JButton("-");
+		botones[i*2].setPreferredSize(new Dimension(10,10));
+		botones[i*2 + 1].setPreferredSize(new Dimension(10,10));
 		JPanel bs = new JPanel();
 		bs.setLayout(new GridLayout(2,1));
 		bs.add(botones[i*2]);
