@@ -10,14 +10,14 @@ import java.util.Locale;
 
 public class Opciones extends JFrame{
 
-    private static final int nCampos = 8;
+    private static final int nCampos = 9;
     private static JTextField[] texts = new JTextField[nCampos];
     private static JTextField dispAtaque, dispBloqueo;
     private static JButton guardar = new JButton("Guardar cambios");
 
     private static final String[] campos = {"HP:", "FUERZA:", "RETARDO DE ATAQUE:",
-				     "VALOR DE ESCUDO:", "PROB. ESQUIVAR", "PROB. EXITO",
-				     "PROB. CRITICO", "PROB. BLOQUEO"};
+					    "VALOR DE ESCUDO:", "PROB. ESQUIVAR", "PROB. EXITO",
+					    "PROB. CRITICO", "PROB. BLOQUEO", "IND. CRITICO"};
 
     
     public Opciones(String name) {
@@ -47,10 +47,10 @@ public class Opciones extends JFrame{
 	dispAtaque = new JTextField(10);
 	dispBloqueo = new JTextField(10);
 	JPanel panelAtaque = new JPanel();
-	panelAtaque.setBorder(BorderFactory.createTitledBorder("DISPERSION ATAQUE:"));
+	panelAtaque.setBorder(BorderFactory.createTitledBorder("DISPER. ATAQUE:"));
 	panelAtaque.add(dispAtaque);
 	JPanel panelBloqueo = new JPanel();
-	panelBloqueo.setBorder(BorderFactory.createTitledBorder("DISPERSION BLOQUEO:"));
+	panelBloqueo.setBorder(BorderFactory.createTitledBorder("DISPER. BLOQUEO:"));
 	panelBloqueo.add(dispBloqueo);
 
 	JPanel factores = new JPanel();
@@ -81,6 +81,7 @@ public class Opciones extends JFrame{
 	texts[5].setText(Float.toString(Generador.incExito));
 	texts[6].setText(Float.toString(Generador.incCritico));
 	texts[7].setText(Float.toString(Generador.incBloqueo));
+	texts[8].setText(Float.toString(Generador.incIndCritico));
 
 	dispAtaque.setText(Float.toString(Mounstro.dispersionAtaque));
 	dispBloqueo.setText(Float.toString(Mounstro.dispersionBloqueo));
@@ -97,6 +98,7 @@ public class Opciones extends JFrame{
 		    Generador.incExito = Float.parseFloat(texts[5].getText());
 		    Generador.incCritico = Float.parseFloat(texts[6].getText());
 		    Generador.incBloqueo = Float.parseFloat(texts[7].getText());
+		    Generador.incIndCritico = Float.parseFloat(texts[8].getText());
 		    
 		    Mounstro.dispersionAtaque = Float.parseFloat(dispAtaque.getText());
 		    Mounstro.dispersionBloqueo = Float.parseFloat(dispBloqueo.getText());

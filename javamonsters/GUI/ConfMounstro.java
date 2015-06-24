@@ -10,13 +10,17 @@ import javax.swing.*;
 
 public class ConfMounstro extends JPanel{
 
+    public static final int nCampos = 10;
+    
     private static final int maxHP=100000, maxFuerza=10000, maxRetardo=10000, maxEscudo=10000;
     private static final int minHP=50, minFuerza=5, minRetardo=1, minEscudo=0;
     private static final float maxEsquivar=0.95f, maxExito=1.f, maxCritico=1.f, maxBloqueo=1.f;
     private static final float minEsquivar=0.f, minExito=0.025f, minCritico=0.f, minBloqueo=0.f;
+    private static final float maxIndCritico=2.0f;
+    private static final float minIndCritico=1.0f;
     private static final String[] campos = {"NOMBRE:", "HP:", "FUERZA:", "RETARDO:",
-				     "ESCUDO:", "P. ESQUIVAR:", "P. EXITO:",
-				     "P. CRITICO:", "P. BLOQUEO:"};
+					    "ESCUDO:", "P. ESQUIVAR:", "P. EXITO:",
+					    "P. CRITICO:", "P. BLOQUEO:", "IND. CRIT.:"};
 
     private JPanel panelGeneral, panelControl;
     private JTextField[] texts = new JTextField[nCampos];
@@ -24,8 +28,6 @@ public class ConfMounstro extends JPanel{
 
     private JTextField nivel, restantes;
     private JButton reiniciar, generar;
-    
-    public static final int nCampos = 9;
     
     public ConfMounstro(String nombre){
 	super();
@@ -230,6 +232,25 @@ public class ConfMounstro extends JPanel{
 		}
 	    });
 
+	botones[9*2].addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		    if ( Float.parseFloat(texts[9].getText())+Generador.incIndCritico <= maxIndCritico
+			 && Integer.parseInt(restantes.getText()) > 0 ){
+			incrementarCampo(texts[9],Generador.incIndCritico);
+			decrementarNivel();
+		    }
+		}
+	    });
+    	botones[9*2 + 1].addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e){
+		    if ( Float.parseFloat(texts[9].getText())-Generador.incIndCritico >= minIndCritico ){
+			decrementarCampo(texts[9],Generador.incIndCritico);
+			incrementarNivel();
+		    }else
+			texts[9].setText(Float.toString(minIndCritico));
+		}
+	    });
+
 	reiniciar.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e){
 		    reiniciarCampos();
@@ -248,6 +269,7 @@ public class ConfMounstro extends JPanel{
 		    texts[6].setText(String.format("%.3f",aux.obtenerExito()));
 		    texts[7].setText(String.format("%.3f",aux.obtenerCritico()));
 		    texts[8].setText(String.format("%.3f",aux.obtenerBloqueo()));
+		    texts[9].setText(String.format("%.3f",aux.obtenerIndiceCritico()));
 		    restantes.setText(Integer.toString(0));
 		}
 	    });
@@ -266,6 +288,7 @@ public class ConfMounstro extends JPanel{
 	texts[6].setText(Float.toString(aux.obtenerExito()));    // Exito
 	texts[7].setText(Float.toString(aux.obtenerCritico()));  // Critico
 	texts[8].setText(Float.toString(aux.obtenerBloqueo()));  // Bloqueo
+	texts[9].setText(Float.toString(aux.obtenerIndiceCritico()));  //Indice de critico
 
 	restantes.setText(nivel.getText());
     }

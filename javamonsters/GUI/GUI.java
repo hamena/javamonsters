@@ -101,7 +101,8 @@ public class GUI extends JFrame {
 					       Float.parseFloat(info1[5].getText()),
 					       Float.parseFloat(info1[6].getText()),
 					       Float.parseFloat(info1[7].getText()),
-					       Float.parseFloat(info1[8].getText()));
+					       Float.parseFloat(info1[8].getText()),
+					       Float.parseFloat(info1[9].getText()));
 
 		    JTextField[] info2 = mounstro2.obtenerCampos();
 		    Mounstro m2 = new Mounstro(info2[0].getText(),
@@ -112,7 +113,8 @@ public class GUI extends JFrame {
 					       Float.parseFloat(info2[5].getText()),
 					       Float.parseFloat(info2[6].getText()),
 					       Float.parseFloat(info2[7].getText()),
-					       Float.parseFloat(info2[8].getText()));
+					       Float.parseFloat(info2[8].getText()),
+					       Float.parseFloat(info2[9].getText()));
 
 		    try{
 			logBatalla.setText("");

@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Mounstro
 {
+    private float i_critico; // indice de critco
     private float p_esquivar, p_exito, p_critico, p_bloqueo;
     private int HP, fuerza, retardo, escudo;
     private String nombre;
@@ -28,11 +29,12 @@ public class Mounstro
 	p_exito = 0.5f;
 	p_critico = 0.0f;
 	p_bloqueo = 0.0f;
+	i_critico = 1.0f;
 
 	sigturno = retardo;
     }
     
-    public Mounstro(String n, int hp, int f, int r, int e, float pesq, float pe, float pc, float pb)
+    public Mounstro(String n, int hp, int f, int r, int e, float pesq, float pe, float pc, float pb, float ic)
     {
 	nombre = n;
 	HP = hp;
@@ -43,6 +45,7 @@ public class Mounstro
 	p_exito = pe;
 	p_critico = pc;
 	p_bloqueo = pb;
+	i_critico = ic;
 	
 	sigturno = retardo; 
     }
@@ -53,8 +56,8 @@ public class Mounstro
 	    float pericia = calcularPericia(dispersionAtaque);
 	    if (rnd.nextFloat() < p_critico){
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
-				   (int)(fuerza * pericia * 1.5) + "! CRITICO\n");
-		return (int) (fuerza * pericia * 1.5f);
+				   (int)(fuerza * pericia * i_critico) + "! CRITICO\n");
+		return (int) (fuerza * pericia * i_critico);
 	    }else{
 		DriverSalida.print("\t" + nombre + " lanza un golpe de " +
 				   (int)(fuerza * pericia) + "!\n");
@@ -99,6 +102,7 @@ public class Mounstro
     public float obtenerExito(){ return p_exito; }
     public float obtenerCritico(){ return p_critico; }
     public float obtenerBloqueo(){ return p_bloqueo; }
+    public float obtenerIndiceCritico(){ return i_critico; }
     public float obtenerEstadoTurno(){ return sigturno; }
     
     public void ponerNombre(String n){ nombre = n; }
@@ -110,6 +114,7 @@ public class Mounstro
     public void ponerExito(float e){ p_exito = e; }
     public void ponerCritico(float c){ p_critico = c; }
     public void ponerBloqueo(float b){ p_bloqueo = b; }
+    public void ponerIndiceCritico(float ic){ i_critico = ic; }
     public void ponerEstadoTurno(float st){ sigturno = st; }
 
     @Override
@@ -123,6 +128,7 @@ public class Mounstro
 	str += "Exito: " + p_exito + "\n";
 	str += "Critico: " + p_critico + "\n";
 	str += "Bloqueo: " + p_bloqueo + "\n";
+	str += "Ind. Crit.: " + i_critico + "\n";
 	return str;
     }
 
