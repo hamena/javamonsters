@@ -1,3 +1,4 @@
+
 package javamonsters.GUI;
 
 import javamonsters.*;
@@ -30,20 +31,14 @@ public class ConfMounstro extends JPanel{
 	super();
 	this.setBorder(BorderFactory.createTitledBorder(nombre));
 	this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
-	//	this.setPreferredSize(new Dimension(300, 600));
+
 	panelGeneral = new JPanel();
-	//	panelGeneral.setBorder(BorderFactory.createTitledBorder("Estadisticas"));
 	
 	panelGeneral.setLayout(new BoxLayout(panelGeneral,BoxLayout.PAGE_AXIS));
 
 	for (int i=0; i<nCampos; ++i){
 	    JPanel fila = new JPanel();
-	    //	    fila.setBorder(BorderFactory.createTitledBorder(campos[i]));
-	    //	    fila.setLayout(new BoxLayout(fila,BoxLayout.PAGE_AXIS));
-	    fila.setLayout(new GridLayout(2,2));
-	    
-	    //	    JPanel aux = new JPanel();
-	    //	    aux.setLayout(new GridLayout(0,2));
+	    fila.setLayout(new GridLayout(1,3));
 	    
 	    fila.add(new JLabel(campos[i]));
 	    texts[i] = new JTextField(10);
@@ -51,28 +46,19 @@ public class ConfMounstro extends JPanel{
 	    if (i > 0){
 		botones[i*2] = new JButton("+");
 		botones[i*2 + 1] = new JButton("-");
-		fila.add(botones[i*2]);
-		fila.add(botones[i*2 + 1]);
+		JPanel bs = new JPanel();
+		bs.setLayout(new GridLayout(2,1));
+		bs.add(botones[i*2]);
+		bs.add(botones[i*2 + 1]);
+		fila.add(bs);
 	    }
 	    
-	    //	    fila.add(new JLabel(campos[i]));
-	    /*
-	    texts[i] = new JTextField(10);
-	    JFrame campoConNombre = new JFrame();
-	    campoConNombre.setLayout(new GridLayout(1,2));
-	    campoConNombre.add(new JLabel(campos[i]));
-	    campoConNombre.add(texts[i]);
-	    
-	    fila.add(campoConNombre);
-	    fila.add(aux);
-	    */
 	    panelGeneral.add(fila);
 	}
 
 	this.add(panelGeneral);
 
 	panelControl = new JPanel();
-	//	panelControl.setBorder(BorderFactory.createTitledBorder("Control"));
 	panelControl.setLayout(new GridLayout(3,2));
 
 	panelControl.add(new JLabel("Nivel:"));
