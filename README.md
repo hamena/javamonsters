@@ -9,6 +9,7 @@ El comportamiento de un mounstro se verá determinado por el poder de sus atribu
 - Compilar y ejecutar:
 
   $ javac javamonsters/GUI/GUI.java
+  
   $ java javamonsters.GUI.GUI
 
 - Empacar:
@@ -20,3 +21,9 @@ El comportamiento de un mounstro se verá determinado por el poder de sus atribu
   Para empacar ejecutar el siguiente script:
 
   $ ./package.sh
+
+- Lanzar paquete:
+
+  $ java -jar builds/javamonsters.java
+
+  O simplemente doble click sobre el paquete con extensión .jar en el directorio builds.
