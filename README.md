@@ -18,11 +18,11 @@ El comportamiento de un mounstro se verá determinado por el poder de sus atribu
 
   $ javac javamonsters/GUI/GUI.java
 
-  Para empacar ejecutar el siguiente script:
+  Para empacar ejecuta el siguiente script:
 
   $ ./package.sh
 
-- Lanzar paquete:
+  Para lanzar el paquete:
 
   $ java -jar builds/javamonsters.java
 
